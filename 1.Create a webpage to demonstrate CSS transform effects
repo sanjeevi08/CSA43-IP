@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CSS Transform Effects</title>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            background-color: lightblue;
+            margin: 30px;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .translate {
+            transform: translate(50px, 20px);
+        }
+        .rotate {
+            transform: rotate(45deg);
+        }
+        .scale {
+            transform: scale(1.5);
+        }
+        .skew {
+            transform: skew(20deg);
+        }
+    </style>
+</head>
+<body>
+    <h2>CSS Transform Effects</h2>
+    <div class="translate">Translate</div>
+    <div class="rotate">Rotate</div>
+    <div class="scale">Scale</div>
+    <div class="skew">Skew</div>
+</body>
+</html>
