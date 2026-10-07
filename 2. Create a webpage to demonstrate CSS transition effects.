@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CSS Transition Effects</title>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            background-color: lightblue;
+            transition: width 2s, height 2s, background-color 2s;
+            text-align: center;
+            padding-top: 30px;
+            box-sizing: border-box;
+        }
+        div:hover {
+            width: 200px;
+            height: 150px;
+            background-color: orange;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>CSS Transition Effect</h2>
+    <div>Hover Me</div>
+
+</body>
+</html>
