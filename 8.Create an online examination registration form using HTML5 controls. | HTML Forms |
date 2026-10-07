@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Online Examination Registration</title>
+</head>
+
+<body>
+
+    <h2>Online Examination Registration</h2>
+
+    <form>
+
+        Name:
+        <input type="text"><br><br>
+
+        Email:
+        <input type="email"><br><br>
+
+        Phone:
+        <input type="tel"><br><br>
+
+        Date of Exam:
+        <input type="date"><br><br>
+
+        Gender:
+        <input type="radio" name="gender"> Male
+        <input type="radio" name="gender"> Female
+        <br><br>
+
+        Course:
+        <select>
+            <option>HTML & CSS</option>
+            <option>Java</option>
+            <option>Python</option>
+            <option>R Programming</option>
+        </select>
+        <br><br>
+
+        Exam Type:
+        <input type="radio" name="exam"> Online
+        <input type="radio" name="exam"> Offline
+        <br><br>
+
+        Upload Photo:
+        <input type="file">
+        <br><br>
+
+        <input type="submit" value="Register">
+        <input type="reset" value="Clear">
+
+    </form>
+
+</body>
+</html>
