@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Selector Priority</title>
+
+    <style>
+        p {
+            color: blue;
+        }
+
+        .student {
+            color: green;
+        }
+
+        #special {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Selector Priority</h2>
+    <p>This uses Element selector.</p>
+    <p class="student">This uses Class selector.</p>
+    <p class="student" id="special">This uses ID selector.</p>
+
+</body>
+</html>
