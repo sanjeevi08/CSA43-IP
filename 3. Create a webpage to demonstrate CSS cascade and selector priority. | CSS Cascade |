@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CSS Cascade and Selector Priority</title>
+
+    <style>
+        p {
+            color: blue;
+        }
+        .text {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <h1>CSS Cascade and Selector Priority</h1>
+    <p>This paragraph uses the element selector.</p>
+    <p class="text">This paragraph uses the class selector.</p>
+    <p id="special" class="text">
+        This paragraph uses the ID selector, so it becomes orange.
+    </p>
+    <p id="inline" class="text"
+       style="color: red;">
+        This paragraph uses inline CSS, so it becomes red.
+    </p>
+    <h2>Selector Priority</h2>
+    <ol>
+        <li>Element selector → Lowest priority</li>
+        <li>Class selector → Higher priority</li>
+        <li>ID selector → Higher priority than class</li>
+        <li>Inline CSS → Very high priority</li>
+        <li>!important → Highest priority</li>
+    </ol>
+</body>
+</html>
