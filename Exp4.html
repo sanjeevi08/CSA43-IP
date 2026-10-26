@@ -1,0 +1,257 @@
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Railway Reservation System</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            margin: 0;
+            background: #f0f4f8;
+        }
+
+        header {
+            background: #064e3b;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        nav {
+            background: #222;
+            text-align: center;
+            padding: 15px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 10px;
+        }
+
+        .container {
+            width: 85%;
+            margin: auto;
+        }
+
+        .box {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+
+        h2 {
+            color: #064e3b;
+        }
+
+        input, select, button {
+            width: 95%;
+            padding: 10px;
+            margin: 8px 0;
+        }
+
+        button {
+            background: #064e3b;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        footer {
+            background: #222;
+            color: white;
+            text-align: center;
+            padding: 15px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                width: 95%;
+            }
+
+            nav a {
+                display: inline-block;
+                margin: 6px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Railway Reservation System</h1>
+    <p>Book Your Train Tickets Easily</p>
+</header>
+
+<nav>
+    <a href="#home">Home</a>
+    <a href="#search">Search Trains</a>
+    <a href="#register">Register</a>
+    <a href="#login">Login</a>
+    <a href="#reservation">Reservation</a>
+    <a href="#pnr">PNR Status</a>
+    <a href="#admin">Admin</a>
+</nav>
+
+<div class="container">
+
+    <div class="box" id="home">
+        <h2>Welcome</h2>
+        <p>Welcome to the Railway Reservation System.
+        Search trains, check availability and reserve your tickets online.</p>
+    </div>
+
+    <div class="box" id="register">
+        <h2>Passenger Registration</h2>
+        <form>
+            <input type="text" placeholder="Full Name" required>
+            <input type="email" placeholder="Email Address" required>
+            <input type="tel" placeholder="Phone Number" required>
+            <input type="password" placeholder="Create Password" required>
+            <button type="submit">Register</button>
+        </form>
+    </div>
+
+    <div class="box" id="login">
+        <h2>Passenger Login</h2>
+        <form>
+            <input type="email" placeholder="Email Address" required>
+            <input type="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+        <a href="#login">Forgot Password?</a>
+    </div>
+
+    <div class="box" id="search">
+        <h2>Search Trains</h2>
+        <form>
+            <input type="text" placeholder="Origin Station" required>
+            <input type="text" placeholder="Destination Station" required>
+            <input type="date" required>
+
+            <select required>
+                <option value="">Select Travel Class</option>
+                <option>General</option>
+                <option>Sleeper</option>
+                <option>AC 3 Tier</option>
+                <option>AC 2 Tier</option>
+                <option>AC First Class</option>
+            </select>
+
+            <button type="submit">Search Trains</button>
+        </form>
+    </div>
+
+    <div class="box" id="reservation">
+        <h2>Ticket Reservation</h2>
+        <form>
+            <input type="text" placeholder="Train Number" required>
+            <input type="text" placeholder="Passenger Name" required>
+            <input type="number" placeholder="Passenger Age" min="1" required>
+
+            <select required>
+                <option value="">Select Gender</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+            </select>
+
+            <input type="text" placeholder="From Station" required>
+            <input type="text" placeholder="To Station" required>
+            <input type="date" required>
+
+            <select required>
+                <option value="">Select Class</option>
+                <option>Sleeper</option>
+                <option>AC 3 Tier</option>
+                <option>AC 2 Tier</option>
+                <option>AC First Class</option>
+            </select>
+
+            <button type="submit">Book Ticket</button>
+        </form>
+    </div>
+
+    <div class="box" id="payment">
+        <h2>Payment Details</h2>
+        <form>
+            <select required>
+                <option value="">Select Payment Mode</option>
+                <option>UPI</option>
+                <option>Debit Card</option>
+                <option>Credit Card</option>
+                <option>Offline Payment</option>
+            </select>
+            <button type="submit">Proceed to Payment</button>
+        </form>
+    </div>
+
+    <div class="box" id="pnr">
+        <h2>Check PNR Status</h2>
+        <form>
+            <input type="text" placeholder="Enter 10-digit PNR Number"
+                   pattern="[0-9]{10}" required>
+            <button type="submit">Check Status</button>
+        </form>
+        <p>Possible statuses: Confirmed, RAC, Waiting List.</p>
+    </div>
+
+    <div class="box" id="cancel">
+        <h2>Cancel Ticket</h2>
+        <form>
+            <input type="text" placeholder="Enter PNR Number"
+                   pattern="[0-9]{10}" required>
+            <button type="submit">Request Cancellation</button>
+        </form>
+        <p>Refund amount depends on the applicable cancellation rules.</p>
+    </div>
+
+    <div class="box" id="history">
+        <h2>Booking History</h2>
+        <p>Your reservation details and ticket history will appear here.</p>
+        <button onclick="window.print()">Print Ticket / Page</button>
+    </div>
+
+    <div class="box" id="admin">
+        <h2>Admin Panel</h2>
+        <form>
+            <input type="text" placeholder="Train Number" required>
+            <input type="text" placeholder="Train Name" required>
+            <input type="text" placeholder="Origin Station" required>
+            <input type="text" placeholder="Destination Station" required>
+            <input type="time" required>
+            <input type="number" placeholder="Ticket Fare" min="1" required>
+
+            <select>
+                <option>Sleeper</option>
+                <option>AC 3 Tier</option>
+                <option>AC 2 Tier</option>
+                <option>AC First Class</option>
+            </select>
+
+            <button type="submit">Add Train</button>
+            <button type="reset">Clear Details</button>
+        </form>
+
+        <h3>Admin Functions</h3>
+        <ul>
+            <li>Manage train schedules</li>
+            <li>Manage seat availability</li>
+            <li>Manage passenger accounts</li>
+            <li>Manage fares and refund rules</li>
+            <li>View booking and payment reports</li>
+        </ul>
+    </div>
+
+</div>
+
+<footer>
+    <p>&copy; 2026 Railway Reservation System</p>
+</footer>
+
+</body>
+</html>
+```

@@ -1,0 +1,517 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hotel Room Booking System</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #f2f6fa;
+    color: #333;
+}
+header {
+    background: #123047;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+nav a {
+    color: white;
+    margin: 10px;
+    text-decoration: none;
+}
+section {
+    padding: 25px;
+    margin: 15px;
+    background: white;
+    border-radius: 8px;
+}
+h2 { color: #123047; }
+input, select, textarea {
+    display: block;
+    width: 95%;
+    padding: 10px;
+    margin: 10px 0;
+}
+button {
+    background: #e6a23c;
+    border: none;
+    padding: 10px 16px;
+    cursor: pointer;
+    margin: 5px;
+}
+.rooms {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+.room {
+    background: #eaf2f8;
+    padding: 20px;
+    flex: 1 1 180px;
+    border-radius: 8px;
+}
+footer {
+    background: #123047;
+    color: white;
+    padding: 15px;
+    text-align: center;
+}
+@media(max-width:600px) {
+    nav a { display: inline-block; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>StayEase Hotel</h1>
+<p>Your comfort is our priority</p>
+<nav>
+<a href="#home">Home</a>
+<a href="#rooms">Rooms</a>
+<a href="#register">Register</a>
+<a href="#booking">Book Room</a>
+<a href="#history">My Bookings</a>
+<a href="#admin">Admin</a>
+<a href="#contact">Contact</a>
+</nav>
+</header>
+
+<section id="home">
+<h2>Welcome to StayEase Hotel</h2>
+<p>Find comfortable rooms at affordable prices. Book your stay easily online.</p>
+</section>
+
+<section id="rooms">
+<h2>Our Room Types</h2>
+<div class="rooms">
+<div class="room">
+<h3>Standard Room</h3>
+<p>Comfortable room with basic facilities.</p>
+<p>Price: ₹1500 per night</p>
+</div>
+<div class="room">
+<h3>Deluxe Room</h3>
+<p>Spacious room with premium amenities.</p>
+<p>Price: ₹2500 per night</p>
+</div>
+<div class="room">
+<h3>Suite Room</h3>
+<p>Luxury room with a separate living area.</p>
+<p>Price: ₹4000 per night</p>
+</div>
+<div class="room">
+<h3>Family Room</h3>
+<p>Large room suitable for families.</p>
+<p>Price: ₹5000 per night</p>
+</div>
+</div>
+</section>
+
+<section id="register">
+<h2>User Registration</h2>
+<form id="registerForm">
+<input type="text" id="name" placeholder="Full Name" required>
+<input type="email" id="email" placeholder="Email Address" required>
+<input type="password" id="password" placeholder="Password" required>
+<button type="submit">Register</button>
+</form>
+
+<h2>User Login</h2>
+<form id="loginForm">
+<input type="email" id="loginEmail" placeholder="Email Address" required>
+<input type="password" id="loginPassword" placeholder="Password" required>
+<button type="submit">Login</button>
+</form>
+<p id="message"></p>
+</section>
+
+<section id="booking">
+<h2>Book a Hotel Room</h2>
+<form id="bookingForm">
+<label>Room Type</label>
+<select id="roomType">
+<option value="Standard">Standard - ₹1500</option>
+<option value="Deluxe">Deluxe - ₹2500</option>
+<option value="Suite">Suite - ₹4000</option>
+<option value="Family">Family - ₹5000</option>
+</select>
+
+<label>Check-in Date</label>
+<input type="date" id="checkin" required>
+
+<label>Check-out Date</label>
+<input type="date" id="checkout" required>
+
+<label>Number of Guests</label>
+<input type="number" id="guests" min="1" max="10" required>
+
+<button type="button" onclick="checkAvailability()">Check Availability</button>
+<p id="availability"></p>
+<button type="submit">Confirm Booking</button>
+</form>
+</section>
+
+<section id="history">
+<h2>My Booking History</h2>
+<div id="bookingList">Please log in to view your bookings.</div>
+</section>
+
+<section id="admin">
+<h2>Administrator Login</h2>
+<form id="adminForm">
+<input type="text" id="adminUser" placeholder="Admin Username" required>
+<input type="password" id="adminPass" placeholder="Admin Password" required>
+<button type="submit">Admin Login</button>
+</form>
+
+<div id="adminPanel" hidden>
+<h3>Manage Room Prices and Quantity</h3>
+<label>Room Type</label>
+<select id="adminRoom">
+<option>Standard</option>
+<option>Deluxe</option>
+<option>Suite</option>
+<option>Family</option>
+</select>
+<input type="number" id="adminPrice" placeholder="Price per night">
+<input type="number" id="adminQuantity" placeholder="Room quantity">
+<button onclick="updateRoom()">Update Room</button>
+
+<h3>All Bookings</h3>
+<div id="allBookings"></div>
+
+<h3>Edit Website Information</h3>
+<textarea id="pageInfo" rows="4">Welcome to StayEase Hotel.</textarea>
+<button onclick="saveInfo()">Save Information</button>
+</div>
+</section>
+
+<section id="contact">
+<h2>Contact Us</h2>
+<p>Email: support@stayease.example</p>
+<p>Phone: +91 98765 43210</p>
+
+<h3>Customer Service Q&A</h3>
+<p><b>Q: Can I cancel my booking?</b></p>
+<p>A: You can cancel at least three days before arrival.</p>
+
+<h3>Local Travel Guide</h3>
+<p>Contact the hotel reception for information about local attractions and transport.</p>
+
+<h3>Privacy Policy</h3>
+<p>Customer information should be used only for booking and hotel services.</p>
+
+<h3>Customer Reviews</h3>
+<form id="reviewForm">
+<input type="text" id="reviewName" placeholder="Your Name" required>
+<select id="rating">
+<option value="5">5 Stars</option>
+<option value="4">4 Stars</option>
+<option value="3">3 Stars</option>
+<option value="2">2 Stars</option>
+<option value="1">1 Star</option>
+</select>
+<textarea id="reviewText" placeholder="Write your review" required></textarea>
+<button type="submit">Submit Review</button>
+</form>
+<div id="reviews"></div>
+</section>
+
+<footer>
+<p>&copy; 2026 StayEase Hotel. All rights reserved.</p>
+</footer>
+
+<script>
+let users = JSON.parse(localStorage.getItem("users") || "[]");
+let bookings = JSON.parse(localStorage.getItem("bookings") || "[]");
+let currentUser = null;
+
+let rooms = {
+    Standard: { price: 1500, quantity: 10 },
+    Deluxe: { price: 2500, quantity: 8 },
+    Suite: { price: 4000, quantity: 5 },
+    Family: { price: 5000, quantity: 6 }
+};
+
+rooms = JSON.parse(localStorage.getItem("rooms") || "null") || rooms;
+
+function saveData() {
+    localStorage.setItem("users", JSON.stringify(users));
+    localStorage.setItem("bookings", JSON.stringify(bookings));
+    localStorage.setItem("rooms", JSON.stringify(rooms));
+}
+
+document.getElementById("registerForm").onsubmit = function(e) {
+    e.preventDefault();
+
+    let name = document.getElementById("name").value.trim();
+    let email = document.getElementById("email").value.trim().toLowerCase();
+    let password = document.getElementById("password").value;
+
+    if (users.some(u => u.email === email)) {
+        alert("Email already registered.");
+        return;
+    }
+
+    users.push({ name, email, password });
+    saveData();
+    alert("Registration successful. Please log in.");
+    this.reset();
+};
+
+document.getElementById("loginForm").onsubmit = function(e) {
+    e.preventDefault();
+
+    let email = document.getElementById("loginEmail").value.trim().toLowerCase();
+    let password = document.getElementById("loginPassword").value;
+
+    currentUser = users.find(u => u.email === email && u.password === password);
+
+    if (currentUser) {
+        document.getElementById("message").textContent =
+            "Welcome, " + currentUser.name;
+        showBookings();
+    } else {
+        alert("Invalid login details. Please register first.");
+    }
+};
+
+function checkAvailability() {
+    let room = document.getElementById("roomType").value;
+    let start = document.getElementById("checkin").value;
+    let end = document.getElementById("checkout").value;
+
+    if (!start || !end || end <= start || start < new Date().toLocaleDateString("en-CA")) {
+        alert("Please select valid future dates.");
+        return;
+    }
+
+    let count = bookings.filter(b =>
+        b.room === room && b.status === "Confirmed" &&
+        start < b.checkout && end > b.checkin
+    ).length;
+
+    let available = rooms[room].quantity - count;
+
+    document.getElementById("availability").textContent =
+        available > 0 ? available + " room(s) available." :
+        "No rooms available for these dates.";
+}
+
+document.getElementById("bookingForm").onsubmit = function(e) {
+    e.preventDefault();
+
+    if (!currentUser) {
+        alert("Please log in before booking.");
+        return;
+    }
+
+    let room = document.getElementById("roomType").value;
+    let start = document.getElementById("checkin").value;
+    let end = document.getElementById("checkout").value;
+    let guests = Number(document.getElementById("guests").value);
+
+    if (!start || !end || end <= start ||
+        start < new Date().toLocaleDateString("en-CA")) {
+        alert("Please select valid future dates.");
+        return;
+    }
+
+    let count = bookings.filter(b =>
+        b.room === room && b.status === "Confirmed" &&
+        start < b.checkout && end > b.checkin
+    ).length;
+
+    if (count >= rooms[room].quantity) {
+        alert("No rooms available.");
+        return;
+    }
+
+    let nights = (new Date(end + "T00:00:00") -
+                  new Date(start + "T00:00:00")) / 86400000;
+
+    bookings.push({
+        id: Date.now(),
+        name: currentUser.name,
+        email: currentUser.email,
+        room: room,
+        checkin: start,
+        checkout: end,
+        guests: guests,
+        price: rooms[room].price * nights,
+        status: "Confirmed"
+    });
+
+    saveData();
+    showBookings();
+    alert("Room booked successfully!");
+    this.reset();
+};
+
+function showBookings() {
+    let mine = bookings.filter(b => b.email === currentUser.email);
+    let output = "";
+
+    mine.forEach(b => {
+        output += `<div class="room">
+        <p>Booking ID: ${b.id}</p>
+        <p>Room: ${b.room}</p>
+        <p>Check-in: ${b.checkin}</p>
+        <p>Check-out: ${b.checkout}</p>
+        <p>Total: ₹${b.price}</p>
+        <p>Status: ${b.status}</p>`;
+
+        if (b.status === "Confirmed") {
+            output += `<button onclick="cancelBooking(${b.id})">Cancel</button>
+            <button onclick="modifyBooking(${b.id})">Modify</button>`;
+        }
+        output += "</div>";
+    });
+
+    document.getElementById("bookingList").innerHTML =
+        output || "No bookings found.";
+}
+
+function canChange(b) {
+    let limit = new Date(b.checkin + "T00:00:00");
+    limit.setDate(limit.getDate() - 3);
+    return new Date() < limit;
+}
+
+function cancelBooking(id, admin = false) {
+    let b = bookings.find(b => b.id === id);
+    if (!b || (!admin && (!currentUser ||
+        b.email !== currentUser.email))) return;
+
+    if (!admin && !canChange(b)) {
+        alert("Cancellation is allowed only more than 3 days before arrival.");
+        return;
+    }
+
+    if (confirm("Cancel this booking?")) {
+        b.status = "Cancelled";
+        saveData();
+        if (currentUser) showBookings();
+        showAdminBookings();
+    }
+}
+
+function modifyBooking(id, admin = false) {
+    let b = bookings.find(b => b.id === id);
+    if (!b || (!admin && (!currentUser ||
+        b.email !== currentUser.email))) return;
+
+    if (!admin && !canChange(b)) {
+        alert("Modification is allowed only more than 3 days before arrival.");
+        return;
+    }
+
+    let start = prompt("Enter new check-in date (YYYY-MM-DD):", b.checkin);
+    if (!start) return;
+
+    let end = prompt("Enter new check-out date (YYYY-MM-DD):", b.checkout);
+    if (!end || end <= start ||
+        start < new Date().toLocaleDateString("en-CA")) {
+        alert("Invalid dates.");
+        return;
+    }
+
+    let occupied = bookings.filter(x =>
+        x.id !== b.id && x.room === b.room &&
+        x.status === "Confirmed" &&
+        start < x.checkout && end > x.checkin
+    ).length;
+
+    if (occupied >= rooms[b.room].quantity) {
+        alert("No rooms available for these dates.");
+        return;
+    }
+
+    let nights = (new Date(end + "T00:00:00") -
+                  new Date(start + "T00:00:00")) / 86400000;
+
+    b.checkin = start;
+    b.checkout = end;
+    b.price = rooms[b.room].price * nights;
+
+    saveData();
+    if (currentUser) showBookings();
+    showAdminBookings();
+    alert("Booking updated successfully.");
+}
+
+document.getElementById("adminForm").onsubmit = function(e) {
+    e.preventDefault();
+
+    if (document.getElementById("adminUser").value === "admin" &&
+        document.getElementById("adminPass").value === "admin123") {
+        document.getElementById("adminPanel").hidden = false;
+        showAdminBookings();
+        alert("Administrator login successful.");
+    } else {
+        alert("Invalid administrator credentials.");
+    }
+};
+
+function updateRoom() {
+    let room = document.getElementById("adminRoom").value;
+    let price = Number(document.getElementById("adminPrice").value);
+    let quantity = Number(document.getElementById("adminQuantity").value);
+
+    if (!Number.isFinite(price) || price <= 0 ||
+        !Number.isInteger(quantity) || quantity < 0) {
+        alert("Enter a valid price and quantity.");
+        return;
+    }
+
+    rooms[room] = { price, quantity };
+    saveData();
+    alert("Room details updated.");
+}
+
+function showAdminBookings() {
+    let output = "";
+
+    bookings.forEach(b => {
+        output += `<div class="room">
+        <p>${b.name} | ${b.room}</p>
+        <p>${b.checkin} to ${b.checkout}</p>
+        <p>Status: ${b.status}</p>
+        <button onclick="modifyBooking(${b.id}, true)">Modify</button>
+        <button onclick="cancelBooking(${b.id}, true)">Cancel</button>
+        </div>`;
+    });
+
+    document.getElementById("allBookings").innerHTML =
+        output || "No bookings available.";
+}
+
+function saveInfo() {
+    localStorage.setItem("hotelInfo",
+        document.getElementById("pageInfo").value);
+    alert("Website information saved.");
+}
+
+document.getElementById("reviewForm").onsubmit = function(e) {
+    e.preventDefault();
+
+    let review = document.createElement("p");
+    review.textContent =
+        document.getElementById("reviewName").value + " - " +
+        document.getElementById("rating").value + " stars: " +
+        document.getElementById("reviewText").value;
+
+    document.getElementById("reviews").appendChild(review);
+    this.reset();
+};
+</script>
+
+</body>
+</html>
